@@ -1,10 +1,12 @@
-//require('dotenv').config()
+const dotenv = require('dotenv');
+const path = require('path')
+dotenv.config({ path: path.resolve(__dirname, './config/.env') });
 const express = require('express');
 const app = express();
 const auth=require('./router/authorRouter')
 const book=require('./router/bookRouter')
 const customer=require('./router/customerRouter')
-const { executeQuery, conn } = require('./utils/db');
+//const { executeQuery, conn } = require('./utils/db');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,9 +26,9 @@ app.listen(3000, (err) => {
     }
 });
 
-conn.connect((err) => {
-    if (!err) console.log('Database is connected');
-});
+// conn.connect((err) => {
+//     if (!err) console.log('Database is connected');
+// });
 
 app.get('/', (req, res) => {
     res.send('hello world');

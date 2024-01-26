@@ -5,11 +5,19 @@ insertBooks={insertBook: (req, res) => {
     let name = req.body.NAME;
     let isbn = req.body.ISBN;
     let edition = req.body.EDITION;
+    const startTime = performance.now();
 
     executeQuery('INSERT INTO BOOK (ID, NAME, ISBN, EDITION) VALUES (?,?,?,?)',[id,name,isbn,edition],
     (err,results)=>{
+        const endTime=performance.now();
         if(!err){
-            res.send("Data inserted successfully")
+            res.send({
+                success: true,
+                message: "Data inserted successfully",
+                startTime:  performance.now(),
+                endTime:performance.now() ,
+                totalTime: endTime - startTime,
+          });
             
     }else{
         console.log(err);

@@ -4,11 +4,18 @@ const { executeQuery } = require('../../utils/db');
 deleteBooks={deleteBook: (req, res) => {
 
     let id = req.body.ID;
-    
+    const startTime = performance.now();
     executeQuery('delete from BOOK where ID = ? ',[id],
     (err, result) => {
+        const endTime=performance.now();
         if (!err) {
-            res.send('Data DELETED successfully');
+            res.send({
+                success: true,
+                message: "Data deleted successfully",
+                startTime:  performance.now(),
+                endTime:performance.now() ,
+                totalTime: endTime - startTime,
+          });
         } else {
             console.error(err);
             res.status(500).send('Error deleted data');
