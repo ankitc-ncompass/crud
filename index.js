@@ -6,6 +6,7 @@ const app = express();
 const auth=require('./router/authorRouter')
 const book=require('./router/bookRouter')
 const customer=require('./router/customerRouter')
+const errHandler=require('./utils/errorHandler')
 //const { executeQuery, conn } = require('./utils/db');
 
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/auth',auth)
 app.use('/book',book)
 app.use('/customer',customer)
+//app.use(errHandler);
 
 
 
